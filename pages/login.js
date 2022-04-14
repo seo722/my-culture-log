@@ -40,10 +40,12 @@ function login({ providers }) {
 export default login;
 
 const Wrapper = tw.div`
+h-screen
 pt-48
 flex
 flex-col
 items-center
+dark:bg-zinc-800
 `;
 
 export async function getServerSideProps(context) {
