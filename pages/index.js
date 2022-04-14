@@ -14,7 +14,7 @@ export default function Home({ providers }) {
     if (!session) {
       router.push("/login");
     }
-  }, [session]);
+  }, [session, router]);
 
   return (
     <>
