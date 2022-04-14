@@ -18,8 +18,6 @@ export default function Home({ providers }) {
 
   return (
     <>
-      <Header />
-
       <div>
         <div>This page gonna be my culture log</div>
       </div>
