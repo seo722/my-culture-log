@@ -124,7 +124,7 @@ export default function Header() {
                     >
                       <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0 ml-[100px]">
                         <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                          <div className="relative grid gap-6 dark:bg-zinc-600 px-5 py-6 sm:gap-8 sm:p-8">
+                          <div className="relative grid gap-6 bg-white dark:bg-zinc-600 px-5 py-6 sm:gap-8 sm:p-8">
                             {books.map((item) => (
                               <div
                                 key={item.name}
@@ -193,7 +193,7 @@ export default function Header() {
                                 onClick={() => {
                                   router.push(item.href);
                                 }}
-                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 hover:bg-zinc-700"
+                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700"
                               >
                                 <item.icon
                                   className="flex-shrink-0 h-6 w-6 text-black/80 dark:text-zinc-200"
@@ -255,7 +255,7 @@ export default function Header() {
                                 onClick={() => {
                                   router.push(item.href);
                                 }}
-                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 hover:bg-zinc-700"
+                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700"
                               >
                                 <item.icon
                                   className="flex-shrink-0 h-6 w-6 text-black/80 dark:text-zinc-200"
