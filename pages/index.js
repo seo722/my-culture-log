@@ -4,13 +4,42 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import Header from "../components/Header";
+import { getStorage, ref } from "firebase/storage";
+import { storage } from "../firebase";
 
 export default function Home({ providers }) {
   const { theme, setTheme } = useTheme();
   const { data: session } = useSession();
   const router = useRouter();
-  console.log(session);
+
+  // TODO: background upload 가능하게 만들기
+  // const uploadBackgroundPic = async () => {
+  //   const docRef = await addDoc(collection(db, "background"), {
+  //     timestamp: serverTimestamp(),
+  //   });
+
+  //   const imageRef = ref(storage, `background/${docRef.id}/image`);
+
+  //   if (selectedFile) {
+  //     await uploadString(imageRef, selectedFile, "data_url").then(async () => {
+  //       const downloadURL = await getDownloadURL(imageRef);
+  //       await updateDoc(doc(db, "background", docRef.id), {
+  //         image: downloadURL,
+  //       });
+  //     });
+  //   }
+  // };
+
+  // const addImageToPost = (e) => {
+  //   const reader = new FileReader();
+  //   if (e.target.files[0]) {
+  //     reader.readAsDataURL(e.target.files[0]);
+  //   }
+
+  //   reader.onload = (readerEvent) => {
+  //     setSelectedFile(readerEvent.target.result);
+  //   };
+  // };
 
   useEffect(() => {
     if (!session) {
@@ -21,13 +50,13 @@ export default function Home({ providers }) {
   return (
     <>
       <div className="bg-white dark:bg-zinc-800 h-screen">
-        <button
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          className="px-6 py-2 mt-10 bg-black dark:bg-white text-white dark:text-black"
-        >
-          toggle to {theme === "light" ? "dark" : "light"}
-        </button>
-        <div>This page gonna be my culture log</div>
+        <div className="md:hidden flex w-full h-full bg-slate-500">
+          <Image
+            layout="fill"
+            src="https://pbs.twimg.com/media/FQEf1hraAAIw8Eg?format=jpg"
+            className="dark:brightness-75 "
+          />
+        </div>
       </div>
     </>
   );

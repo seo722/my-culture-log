@@ -13,4 +13,9 @@
     @apply flex justify-between items-center hover:shadow-xl p-4 cursor-pointer
       rounded-lg text-black bg-white max-w-md mx-auto xl:mx-0;
   }
+
+  .btn {
+    @apply w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm  
+    text-base font-medium text-white dark:text-zinc-800 bg-black hover:bg-black/70 dark:bg-zinc-200 dark:hover:bg-zinc-300;
+  }
 }

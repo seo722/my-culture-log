@@ -6,14 +6,14 @@ const firebaseConfig = {
   apiKey: process.env.API_KEY,
   authDomain: process.env.AUTH_DOMAIN,
   projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
+  storageBucket: "my-culture-log.appspot.com",
   messagingSenderId: process.env.MESSAGING_SENDER_ID,
   appId: process.env.APP_ID,
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore();
-const storage = getStorage();
+const storage = getStorage(app);
 
 export default app;
 export { db, storage };
