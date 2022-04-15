@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply h-screen dark:bg-zinc-800 max-w-[1400px] mx-auto;
+  }
+}
+
+@layer components {
+  .intent {
+    @apply flex justify-between items-center hover:shadow-xl p-4 cursor-pointer
+      rounded-lg text-black bg-white max-w-md mx-auto xl:mx-0;
+  }
+}
