@@ -1,9 +1,16 @@
 import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "../firebase";
+import { deleteObject, ref } from "firebase/storage";
+import { db, storage } from "../firebase";
 
 function Banner({ id, banner }) {
   const onDelete = async () => {
     await deleteDoc(doc(db, "banner", id));
+    const deleteImgRef = ref(storage, `banner/${id}/image`);
+    deleteObject(deleteImgRef)
+      .then(() => {
+        console.log("deleted");
+      })
+      .catch((error) => console.log("error"));
   };
 
   return (
