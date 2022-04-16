@@ -12,12 +12,12 @@ import { getStorage } from "firebase/storage";
 // };
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAZ0dnrq_E5t9ubAbjj7geaXxeQjXrAg80",
-  authDomain: "my-culture-log.firebaseapp.com",
-  projectId: "my-culture-log",
-  storageBucket: "my-culture-log.appspot.com",
-  messagingSenderId: "609302700466",
-  appId: "1:609302700466:web:98a5bea53240ed26a7c4ab",
+  apiKey: "AIzaSyCuIc_uEo9IRZOzU2cG9Li8dPrfpoMPzcQ",
+  authDomain: "culture-log-d49a4.firebaseapp.com",
+  projectId: "culture-log-d49a4",
+  storageBucket: "culture-log-d49a4.appspot.com",
+  messagingSenderId: "165559206645",
+  appId: "1:165559206645:web:ce1dc417b7d23516407bbc",
 };
 
 // const app = initializeApp(firebaseConfig);

@@ -4,43 +4,62 @@ import { useRouter } from "next/router";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { db, storage } from "../firebase";
 import { useState, useEffect, useRef } from "react";
-import { XIcon } from "@heroicons/react/outline";
+import { PhotographIcon, XIcon } from "@heroicons/react/outline";
 import {
+  doc,
   addDoc,
   collection,
   serverTimestamp,
   updateDoc,
+  onSnapshot,
+  query,
+  orderBy,
+  deleteDoc,
 } from "firebase/firestore";
+import Banner from "../components/Banner";
 
 export default function Home({ providers }) {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [text, setText] = useState("");
-  const { theme, setTheme } = useTheme();
+  const [banners, setBanenrs] = useState([]);
   const { data: session } = useSession();
   const fileInputRef = useRef(null);
   const router = useRouter();
 
-  const sendPost = async (e) => {
-    const docRef = await addDoc(collection(db, "posts"), {
-      text,
-      timestamp: serverTimestamp(),
-    });
+  //firebase에서 사진 가져오기
+  useEffect(
+    () =>
+      onSnapshot(
+        query(collection(db, "banner"), orderBy("timestamp", "desc")),
+        (snpashot) => setBanenrs(snpashot.docs)
+      ),
+    [db]
+  );
+  console.log(banners);
 
-    const imageRef = ref(storage, `posts/${docRef.id}/image`);
+  //firebase에 사진 업로드
+  const sendPost = async (e) => {
+    e.preventDefault();
 
     if (selectedFile) {
+      const docRef = await addDoc(collection(db, "banner"), {
+        timestamp: serverTimestamp(),
+      });
+
+      const imageRef = ref(storage, `banner/${docRef.id}/image`);
+
       await uploadString(imageRef, selectedFile, "data_url").then(async () => {
         const downloadURL = await getDownloadURL(imageRef);
-        await updateDoc(doc(db, "posts", docRef.id), {
+        await updateDoc(doc(db, "banner", docRef.id), {
           image: downloadURL,
         });
       });
     }
 
-    setText("");
     setSelectedFile(null);
+    fileInputRef.current.value = null;
   };
 
+  //사진 파일 state 등록
   const addImage = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -53,15 +72,6 @@ export default function Home({ providers }) {
     };
   };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (fileInputRef) {
-  //     uploadBackgroundPic();
-  //     setSelectedFile(null);
-  //     fileInputRef.current.value = null;
-  //   }
-  // };
-
   useEffect(() => {
     if (!session) {
       router.push("/login");
@@ -70,45 +80,56 @@ export default function Home({ providers }) {
 
   return (
     <>
-      <div className="bg-white dark:bg-zinc-800 h-screen">
-        <div>
-          <form action="">
-            <input
-              type="text"
-              placeholder="write"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-            <button onClick={sendPost} className="bg-zinc-300 p-1 rounded-md">
-              send
-            </button>
-          </form>
-          <input type="file" onChange={addImage} ref={fileInputRef} />
+      <div className=" bg-white dark:bg-zinc-800 h-full flex flex-col justify-center items-center">
+        <div className="p-5 border-b border-gray-400 flex flex-col items-center w-full">
+          <div className="flex items-center">
+            <form onSubmit={sendPost}>
+              <div className="flex">
+                <PhotographIcon
+                  className="h-[35px]"
+                  onClick={() => fileInputRef.current.click()}
+                />
+                <input
+                  type="file"
+                  hidden
+                  onChange={addImage}
+                  ref={fileInputRef}
+                />
+                <button
+                  onClick={sendPost}
+                  className="bg-zinc-300 rounded-md h-[35px] w-[50px]"
+                >
+                  post
+                </button>
+              </div>
+            </form>
+          </div>
+          {selectedFile && (
+            <>
+              <div className="relative p-5">
+                <div
+                  className="top-6 left-6 absolute w-8 h-8 bg-[#15181c] hover:bg-[#272c26] bg-opacity-75 rounded-full flex items-center justify-center cursor-pointer"
+                  onClick={() => {
+                    setSelectedFile(null);
+                    fileInputRef.current.value = null;
+                  }}
+                >
+                  <XIcon className="text-white h-5" />
+                </div>
+                <img
+                  src={selectedFile}
+                  alt=""
+                  className="rounded-2xl max-h-80 object-contain"
+                />
+              </div>
+            </>
+          )}
         </div>
-        {selectedFile && (
-          <>
-            <div
-              className="w-8 h-8 bg-[#15181c] hover:bg-[#272c26] bg-opacity-75 rounded-full flex items-center justify-center top-1 left-1 cursor-pointer"
-              onClick={() => {
-                setSelectedFile(null);
-                fileInputRef.current.value = null;
-              }}
-            >
-              <XIcon className="text-white h-5" />
-            </div>
-            <img
-              src={selectedFile}
-              alt=""
-              className="rounded-2xl max-h-80 object-contain"
-            />
-          </>
-        )}
 
-        <div className="md:hidden flex w-full h-full bg-slate-100 justify-center items-start">
-          <img
-            src="https://pbs.twimg.com/media/FQEf1hraAAIw8Eg?format=jpg"
-            className="dark:brightness-75 rounded-2xl max-h-[500px] object-cover mt-10"
-          />
+        <div className="md:hidden flex flex-col w-full justify-center items-center">
+          {banners?.map((banner) => (
+            <Banner key={banner.id} id={banner.id} banner={banner.data()} />
+          ))}
         </div>
       </div>
     </>
