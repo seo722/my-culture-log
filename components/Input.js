@@ -17,7 +17,7 @@ import {
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 import { useSession } from "next-auth/react";
 
-function input() {
+function Input() {
   const { data: session } = useSession();
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -72,61 +72,65 @@ function input() {
         src={session.user.image}
         alt=""
         className="h-11 w-11 rounded-full cursor-pointer"
-      />
-      <div className="divide-y divide-gray-700 w-full">
-        <div className={`${selectedFile && "pb-7"} ${input && "space-y-2.5"}`}>
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="What's happening?"
-            rows="2"
-            className="bg-transparent outline-none text-lg placeholder-gray-500 tracking-wide w-full min-h-[50px]"
-          />
+      />{" "}
+      <form action="submit" className="w-full">
+        <div className="divide-y divide-gray-700 w-full">
+          <div
+            className={`${selectedFile && "pb-7"} ${input && "space-y-2.5"}`}
+          >
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="What's happening?"
+              rows="2"
+              className="bg-transparent outline-none text-lg placeholder-gray-500 tracking-wide w-full min-h-[50px]"
+            />
 
-          {selectedFile && (
-            <div className="relative">
-              <div
-                className="absolute w-8 h-8 bg-[#15181c] hover:bg-[#272c26] bg-opacity-75 rounded-full flex items-center justify-center top-1 left-1 cursor-pointer"
-                onClick={() => setSelectedFile(null)}
-              >
-                <XIcon className="text-white h-5" />
-              </div>
-              <img
-                src={selectedFile}
-                alt=""
-                className="rounded-2xl max-h-80 object-contain"
-              />
-            </div>
-          )}
-        </div>
-        {!loading && (
-          <div className="flex items-center justify-between pt-2.5">
-            <div className="flex items-center">
-              <div
-                className="icon"
-                onClick={() => filePickerRef.current.click()}
-              >
-                <PhotographIcon className=" h-[24px]" />
-                <input
-                  type="file"
-                  ref={filePickerRef}
-                  hidden
-                  onChange={addImageToPost}
+            {selectedFile && (
+              <div className="relative">
+                <div
+                  className="absolute w-8 h-8 bg-[#15181c] hover:bg-[#272c26] bg-opacity-75 rounded-full flex items-center justify-center top-1 left-1 cursor-pointer"
+                  onClick={() => setSelectedFile(null)}
+                >
+                  <XIcon className="text-white h-5" />
+                </div>
+                <img
+                  src={selectedFile}
+                  alt=""
+                  className="rounded-2xl max-h-80 object-contain"
                 />
               </div>
-            </div>
-            <button
-              className="bg-[#ababab] text-black rounded-full px-3 py-1 font-bold shadow-md disabled:opacity-50 disabled:cursor-default"
-              disabled={!input && !selectedFile}
-              onClick={sendPost}
-            >
-              post
-            </button>
+            )}
           </div>
-        )}
-      </div>
+          {!loading && (
+            <div className="flex items-center justify-between pt-2.5">
+              <div className="flex items-center">
+                <div
+                  className="icon"
+                  onClick={() => filePickerRef.current.click()}
+                >
+                  <PhotographIcon className=" h-[24px]" />
+                  <input
+                    type="file"
+                    ref={filePickerRef}
+                    hidden
+                    onChange={addImageToPost}
+                  />
+                </div>
+              </div>
+              <button
+                className="bg-[#ababab] text-black rounded-full px-3 py-1 font-bold shadow-md disabled:opacity-50 disabled:cursor-default"
+                disabled={!input && !selectedFile}
+                onClick={sendPost}
+              >
+                post
+              </button>
+            </div>
+          )}{" "}
+        </div>{" "}
+      </form>
     </div>
   );
 }
 
-export default input;
+export default Input;
