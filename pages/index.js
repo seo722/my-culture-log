@@ -17,6 +17,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import Banner from "../components/Banner";
+import Feed from "../components/Feed";
 
 //toDO: 홈화면 반응형으로, 트위터처럼 만들기(답글 기능, textarea, 삭제 기능)
 
@@ -84,7 +85,8 @@ export default function Home({ providers }) {
     <>
       <div className=" bg-white dark:bg-zinc-800 h-full flex flex-col justify-center items-center">
         <div className="flex flex-col items-center w-full md:px-6">
-          <div className="w-full flex items-center justify-center border-b border-gray-400 py-5 md:hidden">
+          <Feed />
+          {/* <div className="w-full flex items-center justify-center border-b border-gray-400 py-5 ">
             <form onSubmit={sendPost}>
               <img
                 src={session.user.image}
@@ -130,14 +132,14 @@ export default function Home({ providers }) {
                 />
               </div>
             </>
-          )}
+          )} */}
         </div>
-
+        {/* 
         <div className="flex flex-col w-full justify-around items-center md:hidden">
           {banners?.map((banner) => (
             <Banner key={banner.id} id={banner.id} banner={banner.data()} />
           ))}
-        </div>
+        </div> */}
       </div>
     </>
   );
