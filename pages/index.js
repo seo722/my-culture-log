@@ -18,6 +18,8 @@ import {
 } from "firebase/firestore";
 import Banner from "../components/Banner";
 
+//toDO: 홈화면 반응형으로, 트위터처럼 만들기(답글 기능, textarea, 삭제 기능)
+
 export default function Home({ providers }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [banners, setBanenrs] = useState([]);
@@ -81,9 +83,14 @@ export default function Home({ providers }) {
   return (
     <>
       <div className=" bg-white dark:bg-zinc-800 h-full flex flex-col justify-center items-center">
-        <div className="p-5 border-b border-gray-400 flex flex-col items-center w-full">
-          <div className="flex items-center">
+        <div className="flex flex-col items-center w-full md:px-6">
+          <div className="w-full flex items-center justify-center border-b border-gray-400 py-5 md:hidden">
             <form onSubmit={sendPost}>
+              <img
+                src={session.user.image}
+                className="h-11 w-11 rounded-full"
+                alt=""
+              />
               <div className="flex">
                 <PhotographIcon
                   className="h-[35px]"
@@ -126,7 +133,7 @@ export default function Home({ providers }) {
           )}
         </div>
 
-        <div className="md:hidden flex flex-col w-full justify-center items-center">
+        <div className="flex flex-col w-full justify-around items-center md:hidden">
           {banners?.map((banner) => (
             <Banner key={banner.id} id={banner.id} banner={banner.data()} />
           ))}

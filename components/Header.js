@@ -140,17 +140,17 @@ export default function Header() {
                 <div>
                   <span
                     onClick={() => {
-                      router.push("/mypage");
+                      router.push("/");
                     }}
-                    className="cursor-pointer font-bold "
+                    className="cursor-pointer font-bold p-3"
                   >
-                    My Page
+                    Home
                   </span>
                 </div>
                 <div className="-mr-2 flex items-center space-x-2">
                   <ToggleBtn />
                   <Popover.Button
-                    className="bg-white dark:bg-zinc-600 rounded-md p-2 inline-flex items-center justify-center 
+                    className="bg-white dark:bg-zinc-600 rounded-md p-2 pr-3 inline-flex items-center justify-center 
                   text-gray-400 dark:text-gray-200 hover:text-gray-500 hover:bg-gray-100 
                   dark:hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black dark:focus:ring-white"
                   >
@@ -160,6 +160,21 @@ export default function Header() {
                 </div>
               </div>
               <div className="mt-6"></div>
+            </div>
+            <div className="py-6 px-5 space-y-6">
+              <div className="flex flex-col justify-center items-start">
+                {["MyPage", "Setting"].map((item) => (
+                  <span
+                    onClick={() => {
+                      router.push(`/${item.toLowerCase()}`);
+                    }}
+                    key={item}
+                    className="w-full cursor-pointer my-0.5 p-3 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
             <div className="py-6 px-5 space-y-6">
               <div className="flex flex-col justify-center items-start">
