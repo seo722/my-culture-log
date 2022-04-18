@@ -21,10 +21,10 @@ function Feed() {
   );
 
   return (
-    <div className="md:flex w-full h-full justify-center relative">
+    <div className="lg:flex w-full h-full justify-center lg:flex-row flex-col relative">
       <Input />
-      <div className="md:absolute md:left-[500px] md:w-full">
-        <div className="pb-72 md:max-w-2xl md:border-l">
+      <div className="lg:absolute lg:left-[500px] lg:w-full ">
+        <div className="pb-72 lg:max-w-3xl lg:border-l">
           {posts.map((post) => (
             <Post key={post.id} id={post.id} post={post.data()} />
           ))}

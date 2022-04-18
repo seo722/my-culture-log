@@ -24,24 +24,13 @@ import { deleteObject, ref } from "firebase/storage";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Moment from "react-moment";
 import { db, storage } from "../firebase";
 
 function Post({ id, post, postPage }) {
   const { data: session } = useSession();
   const [comments, setComments] = useState([]);
   const router = useRouter();
-
-  //   useEffect(
-  //     () =>
-  //       onSnapshot(
-  //         query(
-  //           collection(db, "posts", id, "comments"),
-  //           orderBy("timestamp", "desc")
-  //         ),
-  //         (snapshot) => setComments(snapshot.docs)
-  //       ),
-  //     [db, id]
-  //   );
 
   const onDelete = async () => {
     deleteDoc(doc(db, "posts", id));
@@ -82,10 +71,10 @@ function Post({ id, post, postPage }) {
               >
                 {post?.username}
               </h4>
-            </div>
-            {/* ·{" "} */}
+            </div>{" "}
+            ·{" "}
             <span className="hover:underline text-sm sm:text-[15px]">
-              {/* <Moment fromNow>{post?.timestamp?.toDate()}</Moment> */}
+              <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
             </span>
             {!postPage && (
               <p className="text-[15px] sm:text-base mt-0.5">{post?.text}</p>
@@ -104,29 +93,11 @@ function Post({ id, post, postPage }) {
           className="rounded-2xl object-cover mr-2"
         />
         <div
-          className={`text-[#6e767d] flex justify-between w-10/12 ${
+          className={`text-[#6e767d] flex justify-end w-11/12 ${
             postPage && "mx-auto"
           }`}
         >
-          <div
-            className="flex items-center space-x-1 group"
-            onClick={(e) => {
-              e.stopPropagation();
-              //   setPostId(id);
-              //   setIsOpen(true);
-            }}
-          >
-            <div className="icon cursor-pointer">
-              <ChatIcon className="h-5 group-hover:text-black" />
-            </div>
-            {comments.length > 0 && (
-              <span className="group-hover:text-[#6e767d] text-sm">
-                {comments.length}
-              </span>
-            )}
-          </div>
-
-          {session.user.uid === post?.id && (
+          {session?.user.uid === post?.id && (
             <div
               className="flex items-center space-x-1 group"
               onClick={onDelete}

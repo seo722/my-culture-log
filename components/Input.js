@@ -66,10 +66,10 @@ function Input() {
 
   return (
     <div
-      className={`md:absolute left-24 w-full md:max-w-md border-b md:border-none md:mr-10 md:-ml-20 border-gray-400 p-3 flex space-x-3 overflow-y-scroll scrollbar-hide `}
+      className={`lg:absolute left-24 w-full lg:max-w-md border-b lg:border-none lg:mr-10 lg:-ml-20 border-gray-400 p-3 flex space-x-3 overflow-y-scroll scrollbar-hide `}
     >
       <img
-        src={session.user.image}
+        src={session?.user.image}
         alt=""
         className="h-11 w-11 rounded-full cursor-pointer"
       />{" "}
@@ -82,6 +82,7 @@ function Input() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="What's happening?"
+              disabled={session?.user.name !== "Seo세오"}
               rows="2"
               className="bg-transparent outline-none text-lg placeholder-gray-500 tracking-wide w-full min-h-[50px]"
             />
@@ -106,11 +107,12 @@ function Input() {
             <div className="flex items-center justify-between pt-2.5">
               <div className="flex items-center">
                 <div
-                  className="icon"
+                  className="icon cursor-pointer"
                   onClick={() => filePickerRef.current.click()}
                 >
                   <PhotographIcon className=" h-[24px]" />
                   <input
+                    disabled={session?.user.name !== "Seo세오"}
                     type="file"
                     ref={filePickerRef}
                     hidden
