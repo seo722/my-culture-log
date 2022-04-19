@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-function search() {
+function Search() {
   const [input, setInput] = useState("");
   const router = useRouter();
 
@@ -26,4 +26,4 @@ function search() {
   );
 }
 
-export default search;
+export default Search;
