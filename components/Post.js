@@ -74,7 +74,9 @@ function Post({ id, post, postPage }) {
             </div>{" "}
             ·{" "}
             <span className="hover:underline text-sm sm:text-[15px]">
-              <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
+              <Moment format="YYYY/MM/DD HH:mm">
+                {post?.timestamp?.toDate()}
+              </Moment>
             </span>
             {!postPage && (
               <p className="text-[15px] sm:text-base mt-0.5">{post?.text}</p>
