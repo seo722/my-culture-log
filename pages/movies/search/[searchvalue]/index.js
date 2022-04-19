@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
 
-function searchValue() {
+function SearchValue() {
   const router = useRouter();
   const searchValue = router.query.searchvalue;
   const { data, isLoading } = useQuery(["search", searchValue], () =>
@@ -34,7 +34,7 @@ function searchValue() {
   );
 }
 
-export default searchValue;
+export default SearchValue;
 
 const API_KEY = "c8f19c449ebdc0261f133e83ef901c46";
 const BASE_PATH = "https://api.themoviedb.org/3";
