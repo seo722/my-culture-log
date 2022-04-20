@@ -10,8 +10,15 @@ function Search() {
     router.push(`/movies/search/${input}`);
   };
 
+  const goToMyList = () => {
+    router.push("/movies");
+  };
+
   return (
     <div>
+      <button className="rounded-full p-3 border" onClick={goToMyList}>
+        내 목록 보기
+      </button>
       <form onSubmit={onSubmit}>
         <input
           type="text"

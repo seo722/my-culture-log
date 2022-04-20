@@ -8,10 +8,13 @@ function SearchValue() {
   const { data, isLoading } = useQuery(["search", searchValue], () =>
     searchMovies(searchValue)
   );
-  console.log(data?.results);
 
   const onBackClick = () => {
     router.push("/movies/search");
+  };
+
+  const onIdClick = (id) => {
+    router.push(`/movies/search/${searchValue}/${id}`);
   };
 
   return (
@@ -20,15 +23,23 @@ function SearchValue() {
         <button onClick={onBackClick} className="border p-3 rounded-lg m-3">
           뒤로가기
         </button>
-        {data?.results.map((movie) => (
-          <>
-            <h1>{movie.title}</h1>
-            <img
-              src={makeImagePath(movie.poster_path, "w500")}
-              alt={movie.title}
-            />
-          </>
-        ))}
+        <div>
+          {data?.results.map((movie) => (
+            <div
+              key={movie.id}
+              className="cursor-pointer"
+              onClick={() => {
+                onIdClick(movie.id);
+              }}
+            >
+              <h1>{movie.title}</h1>
+              <img
+                src={makeImagePath(movie.poster_path, "w500")}
+                alt={movie.title}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
