@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Movie from "../../components/Movie";
 import { db } from "../../firebase";
 
-function books() {
+function Movies() {
   const [movies, setMovies] = useState();
   const router = useRouter();
 
@@ -36,4 +36,4 @@ function books() {
   );
 }
 
-export default books;
+export default Movies;
