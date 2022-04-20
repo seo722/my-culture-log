@@ -11,7 +11,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { db, storage } from "../../../../firebase";
 
-function searchDetail() {
+function SearchDetail() {
   const router = useRouter();
   const { searchvalue, id } = router.query;
   const { data, isLoading } = useQuery(["search", id], () =>
@@ -54,7 +54,7 @@ function searchDetail() {
   );
 }
 
-export default searchDetail;
+export default SearchDetail;
 
 const API_KEY = "c8f19c449ebdc0261f133e83ef901c46";
 const BASE_PATH = "https://api.themoviedb.org/3";

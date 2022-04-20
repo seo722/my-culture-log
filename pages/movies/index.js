@@ -29,7 +29,7 @@ function books() {
       </button>
       <div>
         {movies?.map((movie) => (
-          <Movie movie={movie.data()} />
+          <Movie key={movie.id} movie={movie.data()} />
         ))}
       </div>
     </div>
