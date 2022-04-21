@@ -1,5 +1,76 @@
-function memo() {
-  return <div>메모 작성 페이지, 인풋 넣기</div>;
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "firebase/firestore";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { postIdState } from "../../../atoms/postIdAtom";
+import OneMemo from "../../../components/OneMemo";
+import { db } from "../../../firebase";
+
+function Memo() {
+  const [memo, setMemo] = useState("");
+  const [memos, setMemos] = useState([]);
+  const [postId, setPostId] = useRecoilState(postIdState);
+
+  const router = useRouter();
+  const { id } = router.query;
+
+  if (postId !== "") {
+    useEffect(
+      () =>
+        onSnapshot(
+          query(
+            collection(db, "movies", postId, "memos"),
+            orderBy("timestamp", "desc")
+          ),
+          (snapshot) => setMemos(snapshot.docs)
+        ),
+      [db, postId]
+    );
+  }
+
+  const goBackList = () => {
+    router.push("/movies");
+  };
+
+  const sendMemo = async (e) => {
+    e.preventDefault();
+
+    await addDoc(collection(db, "movies", postId, "memos"), {
+      memo: memo,
+      timestamp: serverTimestamp(),
+    });
+    setMemo("");
+  };
+
+  return (
+    <div>
+      <button onClick={goBackList} className="rounded-full p-3 border">
+        내 목록 보기
+      </button>
+      <form action="submit" onSubmit={sendMemo}>
+        <input
+          disabled={postId === ""}
+          onChange={(e) => setMemo(e.target.value)}
+          value={memo}
+          type="text"
+          placeholder="memo"
+          className="p-3 border rounded-xl"
+        />
+      </form>
+      <div>
+        {memos.map((memo) => (
+          <OneMemo id={memo.id} memo={memo.data()} />
+        ))}
+      </div>
+    </div>
+  );
 }
 
-export default memo;
+export default Memo;

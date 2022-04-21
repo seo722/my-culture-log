@@ -29,7 +29,7 @@ function Movies() {
       </button>
       <div>
         {movies?.map((movie) => (
-          <Movie key={movie.id} movie={movie.data()} />
+          <Movie id={movie.id} key={movie.id} movie={movie.data()} />
         ))}
       </div>
     </div>
