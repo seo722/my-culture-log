@@ -21,19 +21,21 @@ function Memo() {
   const router = useRouter();
   const { id } = router.query;
 
-  if (postId !== "") {
-    useEffect(
-      () =>
-        onSnapshot(
-          query(
-            collection(db, "movies", postId, "memos"),
-            orderBy("timestamp", "desc")
-          ),
-          (snapshot) => setMemos(snapshot.docs)
+  // if (postId !== "") {
+  useEffect(() => {
+    if (postId !== "") {
+      onSnapshot(
+        query(
+          collection(db, "movies", postId, "memos"),
+          orderBy("timestamp", "desc")
         ),
-      [db, postId]
-    );
-  }
+        (snapshot) => setMemos(snapshot.docs)
+      );
+    } else {
+      return;
+    }
+  }, [db, postId]);
+  // }
 
   const goBackList = () => {
     router.push("/movies");
@@ -66,7 +68,7 @@ function Memo() {
       </form>
       <div>
         {memos.map((memo) => (
-          <OneMemo id={memo.id} memo={memo.data()} />
+          <OneMemo key={memo.id} id={memo.id} memo={memo.data()} />
         ))}
       </div>
     </div>
