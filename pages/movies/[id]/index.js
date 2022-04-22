@@ -1,6 +1,8 @@
+import { deleteDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { postIdState } from "../../../atoms/postIdAtom";
+import { db } from "../../../firebase";
 
 function MovieDetail() {
   const [postId, setPostId] = useRecoilState(postIdState);
@@ -15,6 +17,11 @@ function MovieDetail() {
     router.push(`/movies/${id}/memo`);
   };
 
+  const onDelete = async () => {
+    await deleteDoc(doc(db, "movies", postId));
+    router.push("/movies");
+  };
+
   return (
     <div>
       <button onClick={goBackList} className="rounded-full p-3 border">
@@ -22,6 +29,9 @@ function MovieDetail() {
       </button>
       <button onClick={goMemo} className="rounded-full p-3 border">
         메모하러 가기
+      </button>
+      <button onClick={onDelete} className="p-3 border rounded-3xl">
+        delete
       </button>
     </div>
   );
