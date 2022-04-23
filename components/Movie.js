@@ -20,10 +20,17 @@ function Movie({ id, movie }) {
   console.log(movie);
 
   return (
-    <div className="w-full">
-      <div className="bg-gray-100 w-96 m-5 p-5" onClick={onClick}>
-        <h1>{movie.title}</h1>
-        <img src={movie.movie_image} alt="" />
+    <div className="flex items-center justify-center">
+      <div
+        className="bg-gray-300 w-full rounded-xl my-5 md:mx-8 p-5 md:p-10 flex flex-col justify-center items-center"
+        onClick={onClick}
+      >
+        <img
+          className="max-w-[300px] md:h-[400px] md:w-[280px]"
+          src={movie.movie_image}
+          alt=""
+        />
+        <h1 className="mt-3">{movie.title}</h1>
       </div>
     </div>
   );

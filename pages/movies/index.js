@@ -27,7 +27,7 @@ function Movies() {
       <button onClick={goToSearch} className="rounded-full p-3 border">
         검색하러 가기
       </button>
-      <div>
+      <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center">
         {movies?.map((movie) => (
           <Movie id={movie.id} key={movie.id} movie={movie.data()} />
         ))}
