@@ -31,12 +31,16 @@ function SearchDetail() {
       overview: data?.overview,
       timestamp: serverTimestamp(),
     });
+    alert("저장되었습니다.");
+    router.push("/dramas");
   };
 
   return (
     <div>
       <div>
-        <button onClick={goBack}>뒤로가기</button>
+        <button className="rounded-full p-3 border" onClick={goBack}>
+          뒤로가기
+        </button>
       </div>
       <div>
         <h1 className="font-bold">{data?.title}</h1>
@@ -47,9 +51,9 @@ function SearchDetail() {
         ))}
         <p>more Info: {data?.homepage}</p>
       </div>
-      <div className="mt-10" onClick={sendPost}>
+      <button className="rounded-full p-3 border" onClick={sendPost}>
         내 목록에 저장하기
-      </div>
+      </button>
     </div>
   );
 }
