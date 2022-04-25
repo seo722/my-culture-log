@@ -15,20 +15,21 @@ function Search() {
   };
 
   return (
-    <div>
-      <button className="rounded-full p-3 border" onClick={goToMyList}>
-        내 목록 보기
-      </button>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          className="border border-black"
-          placeholder="search"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-      </form>
-      책 검색 페이지: 검색 인풋, 검색 목록
+    <div className="max-w-[1400px] px-4 sm:px-6 mt-4">
+      <div className="border-b flex w-full justify-around md:justify-start">
+        <button className="rounded-full mb-4 p-3 border" onClick={goToMyList}>
+          내 목록 보기
+        </button>
+        <form className="md:ml-5" onSubmit={onSubmit}>
+          <input
+            type="text"
+            className="border border-gray-500 p-3 rounded-md"
+            placeholder="search"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+        </form>
+      </div>
     </div>
   );
 }
