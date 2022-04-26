@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
+import SearchInput from "../../../../components/SearchInput";
 
 function SearchValue() {
   const router = useRouter();
@@ -9,20 +10,14 @@ function SearchValue() {
     searchMovies(searchValue)
   );
 
-  const onBackClick = () => {
-    router.push("/movies/search");
-  };
-
   const onIdClick = (id) => {
     router.push(`/movies/search/${searchValue}/${id}`);
   };
 
   return (
-    <div>
+    <div className="max-w-[1400px] px-4 sm:px-6 mt-4">
+      <SearchInput />
       <div>
-        <button onClick={onBackClick} className="border p-3 rounded-lg m-3">
-          뒤로가기
-        </button>
         <div>
           {data?.results.map((movie) => (
             <div
