@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
+import SearchedMovie from "../../../../components/SearchedMovie";
 import SearchInput from "../../../../components/SearchInput";
 
 function SearchValue() {
@@ -18,21 +19,9 @@ function SearchValue() {
     <div className="max-w-[1400px] px-4 sm:px-6 mt-4">
       <SearchInput />
       <div>
-        <div>
+        <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center">
           {data?.results.map((drama) => (
-            <div
-              key={drama.id}
-              className="cursor-pointer"
-              onClick={() => {
-                onIdClick(drama.id);
-              }}
-            >
-              <h1>{drama.name}</h1>
-              <img
-                src={makeImagePath(drama.poster_path, "w500")}
-                alt={drama.title}
-              />
-            </div>
+            <SearchedMovie key={drama.id} movie={drama} id={drama.id} />
           ))}
         </div>
       </div>

@@ -7,7 +7,10 @@ function SearchInput() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (router.pathname === "/movies/search") {
+    if (
+      router.pathname === "/movies/search" ||
+      router.pathname === "/movies/search/[searchvalue]"
+    ) {
       router.push(`/movies/search/${input}`);
     } else {
       router.push(`/dramas/search/${input}`);
@@ -15,7 +18,10 @@ function SearchInput() {
   };
 
   const goToMyList = () => {
-    if (router.pathname === "/movies/search/[searchvalue]") {
+    if (
+      router.pathname === "/movies/search/[searchvalue]" ||
+      router.pathname === "/movies/search"
+    ) {
       router.push("/movies");
     } else {
       router.push("/dramas");

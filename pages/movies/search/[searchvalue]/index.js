@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import React from "react";
 import { useQuery } from "react-query";
+import SearchedMovie from "../../../../components/SearchedMovie";
 import SearchInput from "../../../../components/SearchInput";
 
 function SearchValue() {
@@ -10,29 +10,13 @@ function SearchValue() {
     searchMovies(searchValue)
   );
 
-  const onIdClick = (id) => {
-    router.push(`/movies/search/${searchValue}/${id}`);
-  };
-
   return (
     <div className="max-w-[1400px] px-4 sm:px-6 mt-4">
       <SearchInput />
       <div>
-        <div>
+        <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center">
           {data?.results.map((movie) => (
-            <div
-              key={movie.id}
-              className="cursor-pointer"
-              onClick={() => {
-                onIdClick(movie.id);
-              }}
-            >
-              <h1>{movie.title}</h1>
-              <img
-                src={makeImagePath(movie.poster_path, "w500")}
-                alt={movie.title}
-              />
-            </div>
+            <SearchedMovie key={movie.id} movie={movie} id={movie.id} />
           ))}
         </div>
       </div>
@@ -49,8 +33,4 @@ function searchMovies(keyword) {
   return fetch(
     `${BASE_PATH}/search/movie?api_key=${API_KEY}&language=ko-KR&query=${keyword}&page=1`
   ).then((response) => response.json());
-}
-
-function makeImagePath(id, format) {
-  return `https://image.tmdb.org/t/p/${format ? format : "original"}/${id}`;
 }
