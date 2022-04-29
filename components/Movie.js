@@ -22,7 +22,7 @@ function Movie({ id, movie }) {
   return (
     <div className="flex items-center justify-center">
       <div
-        className="bg-gray-300 cursor-pointer w-full rounded-xl my-5 md:mx-8 p-5 md:p-10 flex flex-col justify-center items-center"
+        className="bg-gray-200 cursor-pointer w-full rounded-xl my-5 md:mx-8 p-5 md:p-10 flex flex-col justify-center items-center"
         onClick={onClick}
       >
         <img
