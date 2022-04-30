@@ -178,7 +178,7 @@ export default function Header() {
             </div>
             <div className="py-6 px-5 space-y-6">
               <div className="flex flex-col justify-center items-start">
-                {["Books", "Movies", "Dramas"].map((item) => (
+                {["Books", "Movies", "Dramas", "Plan"].map((item) => (
                   <span
                     onClick={() => {
                       router.push(`/${item.toLowerCase()}`);
