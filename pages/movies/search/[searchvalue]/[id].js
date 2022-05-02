@@ -44,34 +44,41 @@ function SearchDetail() {
       </div>
 
       <div>
-        <div className="flex flex-col items-center sm:flex-row p-4 md:p-0 md:mt-4">
+        <div
+          className="flex flex-col items-center lg:items-start lg:flex-row p-4 md:p-0 md:mt-10
+          lg:justify-evenly
+          "
+        >
           <img
             className="w-full sm:max-w-[500px]"
             src={makeImagePath(data?.poster_path, "w500")}
             alt=""
           />
-          <div className="flex flex-col items-center">
-            <h1 className="text-[20px] font-extrabold mt-6 mb-2">
-              {data?.title}
-            </h1>
-            <div className="text-sm mb-4">
-              {data?.genres?.map((genre) => (
-                <span key={genre.id}>{genre.name} · </span>
-              ))}
-              <span>{data?.runtime}분</span>
+          <div className="mt-8 border p-8 rounded-xl h-full flex flex-col items-center lg:ml-6 lg:mt-6">
+            <div className="w-full flex flex-col lg:flex-row lg:items-center lg:mb-4">
+              <h1 className="text-[20px] font-extrabold mb-2 lg:m-0 lg:mr-4">
+                {data?.title}
+              </h1>
+              <div className="text-sm mb-4 lg:m-0">
+                {data?.genres?.map((genre) => (
+                  <span key={genre.id}>{genre.name} · </span>
+                ))}
+                <span>{data?.runtime}분</span>
+              </div>
             </div>
-            <p className="max-w-[600px] font-sm text-[15px] text-justify">
+            <p className="max-w-[500px] font-sm text-[15px] text-justify">
               {data?.overview}
             </p>
-
-            <p>more info: {data?.homepage}</p>
-            <p>release date: {data?.release_date}</p>
+            <div className="w-full mt-4">
+              <p>more info: {data?.homepage}</p>
+              <p>release date: {data?.release_date}</p>
+            </div>
+            <button className="rounded-full p-3 border mt-8" onClick={sendPost}>
+              내 목록에 저장하기
+            </button>
           </div>
         </div>
       </div>
-      <button className="rounded-full p-3 border my-10" onClick={sendPost}>
-        내 목록에 저장하기
-      </button>
     </div>
   );
 }

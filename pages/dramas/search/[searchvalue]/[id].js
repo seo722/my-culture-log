@@ -36,24 +36,41 @@ function SearchDetail() {
   };
 
   return (
-    <div>
-      <div>
-        <button className="rounded-full p-3 border" onClick={goBack}>
+    <div className="max-w-[1400px] px-4 sm:px-6 mt-4">
+      <div className="border-b flex w-full justify-around md:justify-start">
+        <button className="rounded-full p-3 border mb-4" onClick={goBack}>
           뒤로가기
         </button>
       </div>
+
       <div>
-        <h1 className="font-bold">{data?.title}</h1>
-        <img src={makeImagePath(data?.poster_path, "w500")} alt="" />
-        <p>{data?.overview}</p>
-        {data?.genres?.map((genre) => (
-          <span key={genre.id}>{genre.name}</span>
-        ))}
-        <p>more Info: {data?.homepage}</p>
+        <div
+          className="flex flex-col items-center lg:items-start lg:flex-row p-4 md:p-0 md:mt-10
+          lg:justify-evenly
+          "
+        >
+          <img src={makeImagePath(data?.poster_path, "w500")} alt="" />
+          <div className="mt-8 border p-8 rounded-xl h-full flex flex-col items-center lg:ml-6 lg:mt-6">
+            <div className="w-full flex flex-col lg:flex-row lg:items-center lg:mb-4">
+              <h1 className="text-[20px] font-extrabold mb-2 lg:m-0 lg:mr-4">
+                {data?.name}
+              </h1>
+              <div className="text-sm mb-4 lg:m-0">
+                {data?.genres?.map((genre) => (
+                  <span key={genre.id}>{genre.name} · </span>
+                ))}
+              </div>
+            </div>
+            <p className="max-w-[500px] font-sm text-[15px] text-justify">
+              {data?.overview}
+            </p>
+            <button className="rounded-full p-3 border mt-8" onClick={sendPost}>
+              내 목록에 저장하기
+            </button>
+            {/* <p>more Info: {data?.homepage}</p> */}
+          </div>
+        </div>
       </div>
-      <button className="rounded-full p-3 border" onClick={sendPost}>
-        내 목록에 저장하기
-      </button>
     </div>
   );
 }
