@@ -6,7 +6,7 @@ import { postIdState } from "../atoms/postIdAtom";
 function Movie({ id, movie }) {
   const [postId, setPostId] = useRecoilState(postIdState);
   const router = useRouter();
-  console.log(router.asPath);
+  console.log(id);
 
   const onClick = () => {
     if (router.asPath === "/dramas") {
@@ -16,8 +16,6 @@ function Movie({ id, movie }) {
     }
     setPostId(id);
   };
-
-  console.log(movie);
 
   return (
     <div className="flex items-center justify-center">
