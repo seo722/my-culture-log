@@ -54,9 +54,30 @@ function DramaDetail() {
       </div>
 
       <div>
-        <img src={detail?.movie_image} alt="" className="rounded-2xl m-4" />
-        <h1>{detail?.title}</h1>
-        <p>{detail?.overview}</p>
+        <div
+          className="flex flex-col items-center lg:items-start lg:flex-row p-4 md:p-0 md:mt-10
+          lg:justify-evenly
+          "
+        >
+          <img
+            src={detail?.movie_image}
+            alt=""
+            className="w-full sm:max-w-[500px]"
+          />
+          <div className="mt-8 border p-8 rounded-xl h-full flex flex-col items-center lg:ml-6 lg:mt-6">
+            <div className="w-full flex flex-row items-center lg:mb-4">
+              <h1 className="text-[20px] font-extrabold mb-2 lg:mb-0 mr-4">
+                {detail?.title}
+              </h1>
+            </div>
+            <p className="max-w-[500px] font-sm text-[15px] text-justify">
+              {detail?.overview}
+            </p>
+            <button onClick={goMemo} className="rounded-full p-3 border mt-8">
+              메모하러 가기
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

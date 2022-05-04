@@ -26,9 +26,10 @@ function SearchDetail() {
     const docRef = await addDoc(collection(db, "movies"), {
       id: data?.id,
       title: data?.title,
-      movie_image: makeImagePath(data?.poster_path, "w300"),
+      movie_image: makeImagePath(data?.poster_path, "w500"),
       overview: data?.overview,
       timestamp: serverTimestamp(),
+      runtime: data?.runtime,
     });
 
     alert("저장되었습니다.");
@@ -37,7 +38,7 @@ function SearchDetail() {
 
   return (
     <div className="max-w-[1400px] px-4 sm:px-6 mt-4">
-      <div className="border-b flex w-full justify-around md:justify-start">
+      <div className="border-b pl-4 flex w-full justify-around md:justify-start">
         <button className="rounded-full p-3 border mb-4" onClick={goBack}>
           뒤로가기
         </button>

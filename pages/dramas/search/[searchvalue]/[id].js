@@ -27,7 +27,7 @@ function SearchDetail() {
     const docRef = await addDoc(collection(db, "dramas"), {
       id: data?.id,
       title: data?.name,
-      movie_image: makeImagePath(data?.poster_path, "w300"),
+      movie_image: makeImagePath(data?.poster_path, "w500"),
       overview: data?.overview,
       timestamp: serverTimestamp(),
     });
