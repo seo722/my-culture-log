@@ -9,11 +9,11 @@ import {
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { postIdState } from "../../../atoms/postIdAtom";
-import OneMemo from "../../../components/OneMemo";
-import { db } from "../../../firebase";
+import { postIdState } from "../atoms/postIdAtom";
+import { db } from "../firebase";
+import OneMemo from "./OneMemo";
 
-function Memo() {
+function Memos() {
   const [memo, setMemo] = useState("");
   const [memos, setMemos] = useState([]);
   const [postId, setPostId] = useRecoilState(postIdState);
@@ -35,10 +35,6 @@ function Memo() {
     }
   }, [db, postId]);
 
-  const goBackList = () => {
-    router.push("/movies");
-  };
-
   const sendMemo = async (e) => {
     e.preventDefault();
 
@@ -51,9 +47,6 @@ function Memo() {
 
   return (
     <div>
-      <button onClick={goBackList} className="rounded-full p-3 border">
-        내 목록 보기
-      </button>
       <form action="submit" onSubmit={sendMemo}>
         <input
           disabled={postId === ""}
@@ -73,4 +66,4 @@ function Memo() {
   );
 }
 
-export default Memo;
+export default Memos;
