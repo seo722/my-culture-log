@@ -24,14 +24,8 @@ function MovieDetail() {
     }
   }, [postId]);
 
-  console.log(detail);
-
   const goBackList = () => {
     router.push("/movies");
-  };
-
-  const goMemo = () => {
-    router.push(`/movies/${id}/memo`);
   };
 
   const onDelete = async () => {
@@ -47,7 +41,6 @@ function MovieDetail() {
           <button onClick={goBackList} className="rounded-full p-3 border">
             내 목록 보기
           </button>
-
           <button onClick={onDelete} className="p-3 border rounded-3xl">
             delete
           </button>
@@ -79,14 +72,8 @@ function MovieDetail() {
                 <p className="max-w-[500px] font-sm text-[15px] text-justify">
                   {detail?.overview}
                 </p>
-                <button
-                  onClick={goMemo}
-                  className="rounded-full p-3 border mt-8"
-                >
-                  메모하러 가기
-                </button>
               </div>
-              <div>
+              <div className="lg:ml-6 w-full max-w-[560px] mt-6">
                 <Memos />
               </div>
             </div>

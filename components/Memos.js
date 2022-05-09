@@ -26,7 +26,7 @@ function Memos() {
       onSnapshot(
         query(
           collection(db, "movies", postId, "memos"),
-          orderBy("timestamp", "desc")
+          orderBy("timestamp", "asc")
         ),
         (snapshot) => setMemos(snapshot.docs)
       );
@@ -57,7 +57,7 @@ function Memos() {
           className="p-3 border rounded-xl"
         />
       </form>
-      <div>
+      <div className="mt-6">
         {memos.map((memo) => (
           <OneMemo key={memo.id} id={memo.id} memo={memo.data()} />
         ))}
